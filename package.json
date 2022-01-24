@@ -18,6 +18,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "gogo": "git status && git add . && git commit -m 'autoDeploy' && git push",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
