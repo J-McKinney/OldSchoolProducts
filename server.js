@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken"); // Don't Think I Need These
+const bcrypt = require("bcryptjs"); // Don't Think I Need These
 const path = require("path");
 const logger = require("morgan");
 const cors = require("cors");
@@ -33,22 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// app.use(express.static(path.join(__dirname, "client/build")));
-
-// app.get("*", function (_, res) {
-//   res.sendFile(
-//     path.join(__dirname, "./client/build/index.html"),
-//     function (err) {
-//       if (err) {
-//         res.status(500).send(err);
-//       }
-//     }
-//   );
-// });
-
-// app.listen(process.env.PORT || 5000);
-// module.exports = app;
-
+// Bring in controllers
 app.use("/api/auth", AuthController);
 app.use("/api/register", RegisterController);
 
