@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-import "./ResetPasswordScreen.css";
+import Styles from "./ResetPasswordScreen.module.css";
 
 const ResetPasswordScreen = ({ history, match }) => {
   const [password, setPassword] = useState("");
@@ -48,12 +47,12 @@ const ResetPasswordScreen = ({ history, match }) => {
   };
 
   return (
-    <div className="resetpassword-screen">
+    <div className={Styles.resetpasswordScreen}>
       <form
         onSubmit={resetPasswordHandler}
-        className="resetpassword-screen__form"
+        className={Styles.resetpasswordScreen__form}
       >
-        <h3 className="resetpassword-screen__title">Forgot Password</h3>
+        <h3 className={Styles.resetpasswordScreen__title}>Forgot Password</h3>
         {error && <span className="error-message">{error} </span>}
         {success && (
           <span className="success-message">

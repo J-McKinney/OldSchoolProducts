@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import "./ForgotPasswordScreen.css";
+import Styles from "./ForgotPasswordScreen.module.css";
 
 const ForgotPasswordScreen = () => {
   const [email, setEmail] = useState("");
@@ -34,16 +34,16 @@ const ForgotPasswordScreen = () => {
   };
 
   return (
-    <div className="forgotpassword-screen">
+    <div className={Styles.forgotpasswordScreen}>
       <form
         onSubmit={forgotPasswordHandler}
-        className="forgotpassword-screen__form"
+        className={Styles.forgotpasswordScreen__form}
       >
-        <h3 className="forgotpassword-screen__title">Forgot Password</h3>
+        <h3 className={Styles.forgotpasswordScreen__title}>Forgot Password</h3>
         {error && <span className="error-message">{error}</span>}
         {success && <span className="success-message">{success}</span>}
         <div className="form-group">
-          <p className="forgotpassword-screen__subtext">
+          <p className={Styles.forgotpasswordScreen__subtext}>
             Please enter the email address you register your account with. We
             will send you reset password confirmation to this email
           </p>

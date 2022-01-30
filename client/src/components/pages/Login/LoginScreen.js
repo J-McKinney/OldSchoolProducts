@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./LoginScreen.css";
+import Styles from "./LoginScreen.module.css";
 
 const LoginScreen = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -42,9 +42,9 @@ const LoginScreen = ({ history }) => {
   };
 
   return (
-    <div className="login-screen">
-      <form onSubmit={loginHandler} className="login-screen__form">
-        <h3 className="login-screen__title">Login</h3>
+    <div className={Styles.loginScreen}>
+      <form onSubmit={loginHandler} className={Styles.loginScreen__form}>
+        <h3 className={Styles.loginScreen__title}>Login</h3>
         {error && <span className="error-message">{error}</span>}
         <div className="form-group">
           <label htmlFor="email">Email:</label>
@@ -61,7 +61,10 @@ const LoginScreen = ({ history }) => {
         <div className="form-group">
           <label htmlFor="password">
             Password:{" "}
-            <Link to="/forgotpassword" className="login-screen__forgotpassword">
+            <Link
+              to="/forgotpassword"
+              className={Styles.loginScreen__forgotpassword}
+            >
               Forgot Password?
             </Link>
           </label>
@@ -80,7 +83,7 @@ const LoginScreen = ({ history }) => {
           Login
         </button>
 
-        <span className="login-screen__subtext">
+        <span className={Styles.loginScreen__subtext}>
           Don't have an account? <Link to="/register">Register</Link>
         </span>
       </form>

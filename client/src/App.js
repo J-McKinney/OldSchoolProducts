@@ -4,20 +4,24 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 // Screens
-import PrivateScreen from "./components/screens/PrivateScreen";
-import LoginScreen from "./components/screens/LoginScreen";
-import RegisterScreen from "./components/screens/RegisterScreen";
-import ForgotPasswordScreen from "./components/screens/ForgotPasswordScreen";
-import ResetPasswordScreen from "./components/screens/ResetPasswordScreen";
+import PrivateScreen from "./components/pages/Private/PrivateScreen";
+import LoginScreen from "./components/pages/Login/LoginScreen";
+import RegisterScreen from "./components/pages/Register/RegisterScreen";
+import ForgotPasswordScreen from "./components/pages/ForgotPassword/ForgotPasswordScreen";
+import ResetPasswordScreen from "./components/pages/ResetPassword/ResetPasswordScreen";
+// import ShoppingScreen from "./components/pages/Shopping/ShoppingScreen";
 
 const App = () => {
   return (
     <Router>
       <div className="app">
         <Switch>
-          <PrivateRoute exact path="/" component={PrivateScreen} />
           <Route exact path="/login" component={LoginScreen} />
           <Route exact path="/register" component={RegisterScreen} />
+          {/* We want to protect these routes */}
+          <PrivateRoute exact path="/" component={PrivateScreen} />
+          {/* <PrivateRoute exact path="/shop" component={ShoppingScreen} /> */}
+          {/* We want to protect these routes */}
           <Route
             exact
             path="/forgotpassword"

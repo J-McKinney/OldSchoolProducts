@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import "./RegisterScreen.css";
+import Styles from "./RegisterScreen.module.css";
 
 const RegisterScreen = ({ history }) => {
   const [username, setUsername] = useState("");
@@ -51,9 +51,9 @@ const RegisterScreen = ({ history }) => {
   };
 
   return (
-    <div className="register-screen">
-      <form onSubmit={registerHandler} className="register-screen__form">
-        <h3 className="register-screen__title">Register</h3>
+    <div className={Styles.registerScreen}>
+      <form onSubmit={registerHandler} className={Styles.registerScreen__form}>
+        <h3 className={Styles.registerScreen__title}>Register</h3>
         {error && <span className="error-message">{error}</span>}
         <div className="form-group">
           <label htmlFor="name">Username:</label>
@@ -105,7 +105,7 @@ const RegisterScreen = ({ history }) => {
           Register
         </button>
 
-        <span className="register-screen__subtext">
+        <span className={Styles.registerScreen__subtext}>
           Already have an account? <Link to="/login">Login</Link>
         </span>
       </form>
