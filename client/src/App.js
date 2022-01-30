@@ -1,21 +1,37 @@
-import Landing from "./Pages/Landing/Landing";
-import Shop from "./Pages/Shop/Shop";
-import Checkout from "./Pages/Checkout/Checkout";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-function App() {
+// Routing
+import PrivateRoute from "./components/routing/PrivateRoute";
+
+// Screens
+import PrivateScreen from "./components/screens/PrivateScreen";
+import LoginScreen from "./components/screens/LoginScreen";
+import RegisterScreen from "./components/screens/RegisterScreen";
+import ForgotPasswordScreen from "./components/screens/ForgotPasswordScreen";
+import ResetPasswordScreen from "./components/screens/ResetPasswordScreen";
+
+const App = () => {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Landing />} />
-          <Route exact path="/Shop" element={<Shop />} />
-          <Route exact path="/Checkout" element={<Checkout />} />
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <div className="app">
+        <Switch>
+          <PrivateRoute exact path="/" component={PrivateScreen} />
+          <Route exact path="/login" component={LoginScreen} />
+          <Route exact path="/register" component={RegisterScreen} />
+          <Route
+            exact
+            path="/forgotpassword"
+            component={ForgotPasswordScreen}
+          />
+          <Route
+            exact
+            path="/passwordreset/:resetToken"
+            component={ResetPasswordScreen}
+          />
+        </Switch>
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;

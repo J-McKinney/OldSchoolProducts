@@ -1,49 +1,67 @@
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
-// Save a reference to the Schema constructor
-const Schema = mongoose.Schema;
-
-const UserSchema = new Schema({
-  username: { type: String, unique: true },
-  password: String,
-  updated_at: {
-    type: Date,
+const UserSchema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, "Please provide username"],
   },
-  created_at: {
-    type: Date,
+  email: {
+    type: String,
+    required: [true, "Please provide email address"],
+    unique: true,
+    match: [
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+      "Please provide a valid email",
+    ],
   },
+  password: {
+    type: String,
+    required: [true, "Please add a password"],
+    minlength: 6,
+    select: false,
+  },
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 });
 
-UserSchema.methods = {
-  checkPassword: function (inputPassword) {
-    return bcrypt.compareSync(inputPassword, this.password);
-  },
-  hashPassword: (plainTextPassword) => {
-    return bcrypt.hashSync(plainTextPassword, 10);
-  },
-};
-
-UserSchema.pre("save", function (next) {
-  now = new Date();
-  this.updated_at = now;
-  if (!this.created_at) {
-    this.created_at = now;
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
   }
 
-  if (this.password) {
-    this.password = this.hashPassword(this.password);
-  }
-
-  if (this.username) {
-    this.username = this.username.toLowerCase();
-  }
-
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
   next();
 });
 
-// This creates our model from the above schema, using mongoose's model method
+UserSchema.methods.matchPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+UserSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
+
+UserSchema.methods.getResetPasswordToken = function () {
+  const resetToken = crypto.randomBytes(20).toString("hex");
+
+  // Hash token (private key) and save to database
+  this.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  // Set token expire date
+  this.resetPasswordExpire = Date.now() + 10 * (60 * 1000); // Ten Minutes
+
+  return resetToken;
+};
+
 const User = mongoose.model("User", UserSchema);
 
-// Export the Article model
 module.exports = User;

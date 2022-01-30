@@ -1,48 +1,31 @@
+require("dotenv").config({ path: "./config.env" });
 const express = require("express");
 const app = express();
-const jwt = require("jsonwebtoken"); // Don't Think I Need These
-const bcrypt = require("bcryptjs"); // Don't Think I Need These
-const path = require("path");
-const logger = require("morgan");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const AuthController = require("./controllers/auth");
-const RegisterController = require("./controllers/register");
+const connectDB = require("./config/db");
+const errorHandler = require("./middleware/error");
 
-const PORT = process.env.PORT || 3001;
+connectDB();
 
-mongoose
-  .connect(`mongodb://127.0.0.1:27017/OSPDB`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("MongoDB has been connected"))
-  .catch((err) => console.log(err));
-
-const connection = mongoose.connection;
-
-connection.on("connected", () => {
-  console.log("Mongoose connected successfully");
-});
-connection.on("error", (err) => {
-  console.log("Mongoose default connection error: " + err);
-});
-
-app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
-// Bring in controllers
-app.use("/api/auth", AuthController);
-app.use("/api/register", RegisterController);
-
-app.use(express.static(__dirname + "/client/build"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+app.get("/", (req, res, next) => {
+  res.send("Api running");
 });
 
-app.listen(PORT, function () {
-  console.log(`App is running on http://localhost:${PORT}`);
+// Connecting Routes
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/private", require("./routes/private"));
+
+// Error Handler Middleware
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(PORT, () =>
+  console.log(`Sever running on port ${PORT}`)
+);
+
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Logged Error: ${err.message}`);
+  server.close(() => process.exit(1));
 });
