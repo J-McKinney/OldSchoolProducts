@@ -27,8 +27,18 @@ const Checkout = () => {
 
     fetchPrivateDate();
   }, []);
+
+  const logout = async () => {
+    localStorage.removeItem("authToken");
+  };
+
   return error ? (
-    <span className="error-message">{error}</span>
+    <>
+      <span className="error-message">{error}</span>
+      <Link to="/login">
+        <Button variant="primary">Login</Button>
+      </Link>
+    </>
   ) : (
     <>
       <div>{privateData} Checkout Screen</div>
@@ -37,6 +47,11 @@ const Checkout = () => {
       </Link>
       <Link to="/">
         <Button variant="primary">Private Screen</Button>
+      </Link>
+      <Link to="/login">
+        <Button onClick={logout} variant="primary">
+          Logout
+        </Button>
       </Link>
     </>
   );
