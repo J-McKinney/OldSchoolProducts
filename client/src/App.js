@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Routing
-import PrivateRoute from "./components/routing/PrivateRoute";
+import PrivateRoute from "./routing/PrivateRoute";
 
 // Screens
-import PrivateScreen from "./components/pages/Private/PrivateScreen";
-import LoginScreen from "./components/pages/Login/LoginScreen";
-import RegisterScreen from "./components/pages/Register/RegisterScreen";
-import ForgotPasswordScreen from "./components/pages/ForgotPassword/ForgotPasswordScreen";
-import ResetPasswordScreen from "./components/pages/ResetPassword/ResetPasswordScreen";
-import ShoppingScreen from "./components/pages/Shopping/ShoppingScreen";
-import CheckoutScreen from "./components/pages/Checkout/Checkout";
+import PrivateScreen from "./pages/Private/PrivateScreen";
+import LoginScreen from "./pages/Login/LoginScreen";
+import RegisterScreen from "./pages/Register/RegisterScreen";
+import ForgotPasswordScreen from "./pages/ForgotPassword/ForgotPasswordScreen";
+import ResetPasswordScreen from "./pages/ResetPassword/ResetPasswordScreen";
+import ShoppingScreen from "./pages/Shopping/ShoppingScreen";
+import CheckoutScreen from "./pages/Checkout/CheckoutScreen";
 
 const App = () => {
   return (
