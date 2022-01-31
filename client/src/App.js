@@ -9,19 +9,17 @@ import LoginScreen from "./components/pages/Login/LoginScreen";
 import RegisterScreen from "./components/pages/Register/RegisterScreen";
 import ForgotPasswordScreen from "./components/pages/ForgotPassword/ForgotPasswordScreen";
 import ResetPasswordScreen from "./components/pages/ResetPassword/ResetPasswordScreen";
-// import ShoppingScreen from "./components/pages/Shopping/ShoppingScreen";
+import ShoppingScreen from "./components/pages/Shopping/ShoppingScreen";
+import CheckoutScreen from "./components/pages/Checkout/Checkout";
 
 const App = () => {
   return (
     <Router>
       <div className="app">
         <Switch>
+          {/* Public routes */}
           <Route exact path="/login" component={LoginScreen} />
           <Route exact path="/register" component={RegisterScreen} />
-          {/* We want to protect these routes */}
-          <PrivateRoute exact path="/" component={PrivateScreen} />
-          {/* <PrivateRoute exact path="/shop" component={ShoppingScreen} /> */}
-          {/* We want to protect these routes */}
           <Route
             exact
             path="/forgotpassword"
@@ -32,6 +30,13 @@ const App = () => {
             path="/passwordreset/:resetToken"
             component={ResetPasswordScreen}
           />
+          {/* Public routes */}
+
+          {/* We want to protect these routes */}
+          <PrivateRoute exact path="/" component={PrivateScreen} />
+          <PrivateRoute exact path="/shop" component={ShoppingScreen} />
+          <PrivateRoute exact path="/checkout" component={CheckoutScreen} />
+          {/* We want to protect these routes */}
         </Switch>
       </div>
     </Router>

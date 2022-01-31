@@ -9,7 +9,12 @@ exports.login = async (req, res, next) => {
 
   // Check if email and password is provided
   if (!email || !password) {
-    return next(new ErrorResponse("Please provide an email and password", 400));
+    return next(
+      new ErrorResponse(
+        "Please provide an email (login, !email) and password (login, !password)",
+        400
+      )
+    );
   }
 
   try {
@@ -17,14 +22,21 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      return next(new ErrorResponse("Invalid credentials", 401));
+      return next(
+        new ErrorResponse("Invalid User findOne Match Credentials", 401)
+      );
     }
 
     // Check that password match
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-      return next(new ErrorResponse("Invalid credentials", 401));
+      return next(
+        new ErrorResponse(
+          "Invalid Password matchPassword Match Credentials",
+          401
+        )
+      );
     }
 
     sendToken(user, 200, res);
@@ -59,7 +71,9 @@ exports.forgotPassword = async (req, res, next) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return next(new ErrorResponse("No email could not be sent", 404));
+      return next(
+        new ErrorResponse("No email could not be sent (forgotpassword) ", 404)
+      );
     }
 
     // Reset Token Gen and add to database hashed (private) version of token
@@ -93,7 +107,9 @@ exports.forgotPassword = async (req, res, next) => {
 
       await user.save();
 
-      return next(new ErrorResponse("Email could not be sent", 500));
+      return next(
+        new ErrorResponse("Email could not be sent (forgotPassword) ", 500)
+      );
     }
   } catch (err) {
     next(err);
@@ -136,5 +152,5 @@ exports.resetPassword = async (req, res, next) => {
 
 const sendToken = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
-  res.status(statusCode).json({ sucess: true, token });
+  res.status(statusCode).json({ success: true, token });
 };

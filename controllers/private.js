@@ -1,6 +1,6 @@
 exports.getPrivateRoute = (req, res, next) => {
   res.status(200).json({
     success: true,
-    data: "You got access to the private data in this route",
+    data: "Welcome to Old School Products, feel free to shop around.",
   });
 };

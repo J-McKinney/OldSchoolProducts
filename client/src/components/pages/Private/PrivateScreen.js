@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 // import Styles from "./PrivateScreen.module.css";
 
 const PrivateScreen = () => {
@@ -29,7 +31,15 @@ const PrivateScreen = () => {
   return error ? (
     <span className="error-message">{error}</span>
   ) : (
-    <div>{privateData}</div>
+    <>
+      <div>{privateData} Private Landing Screen</div>
+      <Link to="/shop">
+        <Button variant="primary">Shop</Button>
+      </Link>
+      <Link to="/checkout">
+        <Button variant="primary">Checkout</Button>
+      </Link>
+    </>
   );
 };
 
