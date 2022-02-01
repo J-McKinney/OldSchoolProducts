@@ -45,10 +45,11 @@ const LoginScreen = ({ history }) => {
     <div className={Styles.loginScreen}>
       <form onSubmit={loginHandler} className={Styles.loginScreen__form}>
         <h3 className={Styles.loginScreen__title}>Login</h3>
-        {error && <span className="error-message">{error}</span>}
+        {error && <span className={Styles.errorMessage}>{error}</span>}
         <div className="form-group">
           <label htmlFor="email">Email:</label>
           <input
+            className={Styles.emailEntry}
             type="email"
             required
             id="email"
@@ -69,6 +70,7 @@ const LoginScreen = ({ history }) => {
             </Link>
           </label>
           <input
+            className={Styles.passwordEntry}
             type="password"
             required
             id="password"
@@ -79,7 +81,7 @@ const LoginScreen = ({ history }) => {
             tabIndex={2}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button id={Styles.loginBtn} type="submit" className="btn btn-primary">
           Login
         </button>
 

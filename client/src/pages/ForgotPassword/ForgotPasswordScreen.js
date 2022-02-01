@@ -40,8 +40,8 @@ const ForgotPasswordScreen = () => {
         className={Styles.forgotpasswordScreen__form}
       >
         <h3 className={Styles.forgotpasswordScreen__title}>Forgot Password</h3>
-        {error && <span className="error-message">{error}</span>}
-        {success && <span className="success-message">{success}</span>}
+        {error && <span className={Styles.errorMessage}>{error}</span>}
+        {success && <span className={Styles.successMessage}>{success}</span>}
         <div className="form-group">
           <p className={Styles.forgotpasswordScreen__subtext}>
             Please enter the email address you register your account with. We
@@ -49,6 +49,7 @@ const ForgotPasswordScreen = () => {
           </p>
           <label htmlFor="email">Email:</label>
           <input
+            className={Styles.emailEntry}
             type="email"
             required
             id="email"
@@ -57,7 +58,7 @@ const ForgotPasswordScreen = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" id={Styles.emailBtn} className="btn btn-primary">
           Send Email
         </button>
       </form>

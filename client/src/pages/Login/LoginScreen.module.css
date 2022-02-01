@@ -19,6 +19,18 @@
   margin-bottom: 1rem;
 }
 
+.emailEntry {
+  border-radius: 15px;
+}
+
+.passwordEntry {
+  border-radius: 15px;
+}
+
+#loginBtn {
+  border-radius: 15px;
+}
+
 .loginScreen__forgotpassword {
   font-size: 0.7rem;
 }
