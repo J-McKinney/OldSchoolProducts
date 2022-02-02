@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "author": "Jesse McKinney",
   "scripts": {
     "gogo": "git status && git add . && git commit -m 'autoDeploy' && git push",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
@@ -13,7 +14,6 @@
     "heroku-postnuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "path": "^0.12.7",
