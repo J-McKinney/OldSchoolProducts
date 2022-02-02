@@ -1,21 +1,19 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 // Routing
 import PrivateRoute from "./routing/PrivateRoute";
-
 // Screens
-import PrivateScreen from "./pages/Private/PrivateScreen";
+import HomeScreen from "./pages/Home/HomeScreen";
 import LoginScreen from "./pages/Login/LoginScreen";
 import RegisterScreen from "./pages/Register/RegisterScreen";
 import ForgotPasswordScreen from "./pages/ForgotPassword/ForgotPasswordScreen";
 import ResetPasswordScreen from "./pages/ResetPassword/ResetPasswordScreen";
-import ShoppingScreen from "./pages/Shopping/ShoppingScreen";
-import CheckoutScreen from "./pages/Checkout/CheckoutScreen";
+import ProductScreen from "./pages/Product/ProductScreen";
+import CartScreen from "./pages/Cart/CartScreen";
 
 const App = () => {
   return (
-    <Router>
-      <div className="app">
+    <>
+      <Router>
         <Switch>
           {/* Public routes */}
           <Route exact path="/login" component={LoginScreen} />
@@ -33,13 +31,13 @@ const App = () => {
           {/* Public routes */}
 
           {/* We want to protect these routes */}
-          <PrivateRoute exact path="/" component={PrivateScreen} />
-          <PrivateRoute exact path="/shop" component={ShoppingScreen} />
-          <PrivateRoute exact path="/checkout" component={CheckoutScreen} />
+          <PrivateRoute exact path="/" component={HomeScreen} />
+          <PrivateRoute exact path="/product/:id" component={ProductScreen} />
+          <PrivateRoute exact path="/cart" component={CartScreen} />
           {/* We want to protect these routes */}
         </Switch>
-      </div>
-    </Router>
+      </Router>
+    </>
   );
 };
 

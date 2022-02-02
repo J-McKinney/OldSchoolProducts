@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Product from "../../components/Product/Product";
 import { getProducts as listProducts } from "../../redux/actions/productActions";
-// import Styles from "./PrivateScreen.module.css";
+import Styles from "./HomeScreen.module.css";
 
 const PrivateScreen = () => {
   const [error, setError] = useState("");
@@ -55,9 +55,9 @@ const PrivateScreen = () => {
   ) : (
     <>
       {/* //////////////////////////////////////////////////////////// */}
-      <div className="homescreen">
-        <h2 className="homescreen__title">Latest Products</h2>
-        <div className="homescreen__products">
+      <div className={Styles.homescreen}>
+        <h2 className={Styles.homescreen__title}>Latest Products</h2>
+        <div className={Styles.homescreen__products}>
           {loading ? (
             <h2>Loading...</h2>
           ) : err ? (
@@ -78,13 +78,13 @@ const PrivateScreen = () => {
       </div>
       <br />
       {/* //////////////////////////////////////////////////////////// */}
-      <div>{privateData} Private Landing Screen</div>
-      <Link to="/shop">
+      <div>{privateData} Private Home Screen</div>
+      {/* <Link to="/shop">
         <Button variant="primary">Shop</Button>
       </Link>
       <Link to="/checkout">
         <Button variant="primary">Checkout</Button>
-      </Link>
+      </Link> */}
       <Link to="/login">
         <Button onClick={logout} variant="primary">
           Logout
