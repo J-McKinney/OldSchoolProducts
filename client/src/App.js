@@ -10,6 +10,8 @@ import ResetPasswordScreen from "./pages/ResetPassword/ResetPasswordScreen";
 import ProductScreen from "./pages/Product/ProductScreen";
 import CartScreen from "./pages/Cart/CartScreen";
 
+import Navbar from "./components/Navbar/Navbar";
+
 const App = () => {
   return (
     <>
@@ -31,9 +33,12 @@ const App = () => {
           {/* Public routes */}
 
           {/* We want to protect these routes */}
-          <PrivateRoute exact path="/" component={HomeScreen} />
-          <PrivateRoute exact path="/product/:id" component={ProductScreen} />
-          <PrivateRoute exact path="/cart" component={CartScreen} />
+          <>
+            <Navbar />
+            <PrivateRoute exact path="/" component={HomeScreen} />
+            <PrivateRoute exact path="/product/:id" component={ProductScreen} />
+            <PrivateRoute exact path="/cart" component={CartScreen} />
+          </>
           {/* We want to protect these routes */}
         </Switch>
       </Router>

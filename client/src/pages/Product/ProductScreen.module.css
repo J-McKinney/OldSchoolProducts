@@ -67,6 +67,23 @@
   border-radius: 5px;
 }
 
+.myButton {
+  grid-column: 1/-1;
+  width: 100%;
+  padding: 10px 16px;
+  background: #171717;
+  color: #f4f4f4;
+  border: 1px solid #171717;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.addBtn {
+  background: #171717;
+  color: #f4f4f4;
+}
+
 .right__info select {
   padding: 10px 16px;
 }

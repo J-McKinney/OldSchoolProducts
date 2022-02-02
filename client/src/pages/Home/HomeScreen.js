@@ -39,11 +39,7 @@ const PrivateScreen = () => {
     };
 
     fetchPrivateDate();
-  }, []);
-
-  const logout = async () => {
-    localStorage.removeItem("authToken");
-  };
+  }, [privateData]);
 
   return error ? (
     <>
@@ -54,7 +50,6 @@ const PrivateScreen = () => {
     </>
   ) : (
     <>
-      {/* //////////////////////////////////////////////////////////// */}
       <div className={Styles.homescreen}>
         <h2 className={Styles.homescreen__title}>Latest Products</h2>
         <div className={Styles.homescreen__products}>
@@ -76,20 +71,6 @@ const PrivateScreen = () => {
           )}
         </div>
       </div>
-      <br />
-      {/* //////////////////////////////////////////////////////////// */}
-      <div>{privateData} Private Home Screen</div>
-      {/* <Link to="/shop">
-        <Button variant="primary">Shop</Button>
-      </Link>
-      <Link to="/checkout">
-        <Button variant="primary">Checkout</Button>
-      </Link> */}
-      <Link to="/login">
-        <Button onClick={logout} variant="primary">
-          Logout
-        </Button>
-      </Link>
     </>
   );
 };

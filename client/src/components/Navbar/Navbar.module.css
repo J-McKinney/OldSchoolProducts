@@ -8,10 +8,15 @@
   z-index: 50;
 }
 
+.navbar__logo {
+  text-decoration: none;
+}
+
 .navbar__logo h2 {
   color: #f4f4f4;
   font-size: 1.4rem;
   cursor: pointer;
+  text-decoration: none !important;
 }
 
 .navbar__links {
@@ -45,7 +50,7 @@
 }
 
 .cart__link:hover {
-  background: #dd219e;
+  background: coral;
   color: #f4f4f4;
 }
 
@@ -83,10 +88,6 @@
 }
 
 @media (max-width: 960px) {
-  .navbar__links {
-    display: none;
-  }
-
   .hamburger__menu {
     display: flex;
   }

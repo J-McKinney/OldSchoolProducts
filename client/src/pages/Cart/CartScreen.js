@@ -53,11 +53,7 @@ const Checkout = () => {
     };
 
     fetchPrivateDate();
-  }, []);
-
-  const logout = async () => {
-    localStorage.removeItem("authToken");
-  };
+  }, [privateData]);
 
   return error ? (
     <>
@@ -68,7 +64,6 @@ const Checkout = () => {
     </>
   ) : (
     <>
-      {/* /////////////////////////////////////////////////////// */}
       <div className={Styles.cartscreen}>
         <div className={Styles.cartscreen__left}>
           <h2>Shopping Cart</h2>
@@ -97,21 +92,13 @@ const Checkout = () => {
           <div>
             <button>Proceed To Checkout</button>
           </div>
+          <div>
+            <Link to="/">
+              <button>Continue Shopping</button>
+            </Link>
+          </div>
         </div>
       </div>
-      {/* /////////////////////////////////////////////////////// */}
-      <div>{privateData} Checkout Cart Screen</div>
-      {/* <Link to="/cart">
-        <Button variant="primary">Cart</Button>
-      </Link>
-      <Link to="/">
-        <Button variant="primary">View all products</Button>
-      </Link> */}
-      <Link to="/login">
-        <Button onClick={logout} variant="primary">
-          Logout
-        </Button>
-      </Link>
     </>
   );
 };

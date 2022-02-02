@@ -26,8 +26,11 @@ const ShoppingScreen = ({ match, history }) => {
 
   const addToCartHandler = () => {
     dispatch(addToCart(product._id, qty));
-    // history.push(`/shop`);
     history.push(`/cart`);
+  };
+
+  const continueShopping = () => {
+    history.push(`/`);
   };
 
   useEffect(() => {
@@ -49,11 +52,7 @@ const ShoppingScreen = ({ match, history }) => {
     };
 
     fetchPrivateDate();
-  }, []);
-
-  const logout = async () => {
-    localStorage.removeItem("authToken");
-  };
+  }, [privateData]);
 
   return error ? (
     <>
@@ -64,7 +63,6 @@ const ShoppingScreen = ({ match, history }) => {
     </>
   ) : (
     <>
-      {/* /////////////////////////////////////////////////////// */}
       <div className={Styles.productscreen}>
         {loading ? (
           <h2>Loading...</h2>
@@ -109,24 +107,16 @@ const ShoppingScreen = ({ match, history }) => {
                     Add To Cart
                   </button>
                 </p>
+                <p>
+                  <button type="button" onClick={continueShopping}>
+                    Continue Shopping
+                  </button>
+                </p>
               </div>
             </div>
           </>
         )}
       </div>
-      {/* /////////////////////////////////////////////////////// */}
-      <div>{privateData} View Product Page</div>
-      {/* <Link to="/checkout">
-        <Button variant="primary">Checkout</Button>
-      </Link>
-      <Link to="/">
-        <Button variant="primary">Private Screen</Button>
-      </Link> */}
-      <Link to="/login">
-        <Button onClick={logout} variant="primary">
-          Logout
-        </Button>
-      </Link>
     </>
   );
 };

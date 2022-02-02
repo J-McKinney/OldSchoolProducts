@@ -10,33 +10,37 @@ const Navbar = ({ click }) => {
     return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
   };
 
+  const logout = async () => {
+    localStorage.removeItem("authToken");
+  };
+
   return (
-    <nav className={Styles.navbar}>
-      <div className={Styles.navbar__logo}>
-        <h2>MERN Shopping Cart</h2>
-      </div>
+    <>
+      <nav className={Styles.navbar}>
+        <Link style={{ textDecoration: "none" }} to="/">
+          <div className={Styles.navbar__logo}>
+            <h2>Old School Products</h2>
+          </div>
+        </Link>
 
-      <ul className={Styles.navbar__links}>
-        <li>
-          <Link to="/cart" className={Styles.cart__link}>
-            <i className="fas fa-shopping-cart"></i>
-            <span>
-              Cart{" "}
-              <span className={Styles.cartlogo__badge}>{getCartCount()}</span>
-            </span>
-          </Link>
-        </li>
-        <li>
-          <Link to="/">Shop</Link>
-        </li>
-      </ul>
-
-      <div className={Styles.hamburger__menu} onClick={click}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </nav>
+        <ul className={Styles.navbar__links}>
+          <li>
+            <Link to="/cart" className={Styles.cart__link}>
+              <i className="fas fa-shopping-cart"></i>
+              <span>
+                Cart{" "}
+                <span className={Styles.cartlogo__badge}>{getCartCount()}</span>
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link onClick={logout} to="/login">
+              Logout
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 };
 
