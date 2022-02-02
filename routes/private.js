@@ -4,7 +4,5 @@ const { getPrivateRoute } = require("../controllers/private");
 const { protect } = require("../middleware/auth");
 
 router.route("/").get(protect, getPrivateRoute);
-router.route("/shop").get(protect, getPrivateRoute);
-router.route("/checkout").get(protect, getPrivateRoute);
 
 module.exports = router;
