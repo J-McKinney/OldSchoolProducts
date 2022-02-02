@@ -47,7 +47,7 @@ const ShoppingScreen = ({ match, history }) => {
         setPrivateData(data.data);
       } catch (error) {
         localStorage.removeItem("authToken");
-        setError("You are not authorized please login");
+        setError("You are not authorized please login ProductScreen.js");
       }
     };
 
